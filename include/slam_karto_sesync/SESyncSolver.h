@@ -17,33 +17,32 @@
 /**
  * @brief Wrapper for G2O to interface with Open Karto
  */
-class SESyncSolver : public karto::ScanSolver
-{
+class SESyncSolver : public karto::ScanSolver {
 
 public:
 
     SESyncSolver(bool debug = false);
-    
+
     virtual ~SESyncSolver();
-    
+
     /**
      * @brief Clear the vector of corrections
      * @details Empty out previously computed corrections
      */
     virtual void Clear();
-    
+
     /**
      * @brief Solve the SLAM back-end
      * @details Calls G2O to solve the SLAM back-end
      */
     virtual void Compute();
-    
+
     /**
      * @brief Get the vector of corrections
      * @details Get the vector of corrections
      * @return Vector with corrected poses
      */
-    virtual const karto::ScanSolver::IdPoseVector& GetCorrections() const;
+    virtual const karto::ScanSolver::IdPoseVector &GetCorrections() const;
 
     /**
      * @brief Add a node to pose-graph
@@ -51,15 +50,15 @@ public:
      * 
      * @param pVertex the node to be added in
      */
-    virtual void AddNode(karto::Vertex<karto::LocalizedRangeScan>* pVertex);
-    
+    virtual void AddNode(karto::Vertex <karto::LocalizedRangeScan> *pVertex);
+
     /**
      * @brief Add an edge constraint to pose-graph
      * @details Adds a relative pose measurement constraint between two poses in the graph
      * 
      * @param pEdge [description]
      */
-    virtual void AddConstraint(karto::Edge<karto::LocalizedRangeScan>* pEdge);
+    virtual void AddConstraint(karto::Edge <karto::LocalizedRangeScan> *pEdge);
 
     /**
      * @brief Get the pose-graph 
@@ -67,19 +66,20 @@ public:
      * 
      * @param g the graph
      */
-    void getGraph(std::vector<Eigen::Vector2d> &nodes, std::vector<std::pair<Eigen::Vector2d, Eigen::Vector2d> > &edges);
+    void
+    getGraph(std::vector <Eigen::Vector2d> &nodes, std::vector <std::pair<Eigen::Vector2d, Eigen::Vector2d>> &edges);
 
-  private:
-    
+private:
+
     karto::ScanSolver::IdPoseVector corrections_;
 
     SESyncOptimizer optimizer_;
 
-    std::vector<Eigen::Vector2d> graphNodes_;
+    std::vector <Eigen::Vector2d> graphNodes_;
 
     bool debug_;
 
-    std::ofstream graphFileOutput_; 
+    std::ofstream graphFileOutput_;
 
     std::stringstream vertexListStream_;
 

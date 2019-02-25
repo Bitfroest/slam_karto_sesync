@@ -16,19 +16,19 @@ using namespace SESync;
  * @details Stores the relative pose measurements and solves the pose-graph SLAM problem using SE-Sync
  * 
  */
-class SESyncOptimizer
-{
+class SESyncOptimizer {
 
 public:
 
-	/**
-	 * @brief Constructor
-	 */
+    /**
+     * @brief Constructor
+     */
     SESyncOptimizer();
+
     /**
      * @brief Destructor
      */
-    ~SESyncOptimizer(){}
+    ~SESyncOptimizer() {}
 
     /**
      * @brief Add a new relative pose measurement
@@ -39,7 +39,8 @@ public:
      * @param z relative pose measurement
      * @param cov covariance matrix of the relative pose estimate
      */
-    void addRelativePoseMeasurement(const int sourceNode, const int targetNode, const Eigen::Vector3d z, const Eigen::Matrix<double,3,3> inf);
+    void addRelativePoseMeasurement(const int sourceNode, const int targetNode, const Eigen::Vector3d z,
+                                    const Eigen::Matrix<double, 3, 3> inf);
 
     /**
      * @brief Solve the optimization problem
@@ -51,7 +52,7 @@ public:
      * @brief Get the set of estimated robot poses
      * @details Get the set of estimated robot poses
      */
-    void getPoses(std::vector<Eigen::Vector3d> &poses);
+    void getPoses(std::vector <Eigen::Vector3d> &poses);
 
 private:
 
@@ -64,8 +65,8 @@ private:
      */
     double rotMat2Yaw(Eigen::MatrixXd R);
 
-	std::vector<SESync::RelativePoseMeasurement> measurements_; //vector of relative pose measurements
+    std::vector <SESync::RelativePoseMeasurement> measurements_; //vector of relative pose measurements
 
-	std::vector<Eigen::Vector3d> estimate_;// the estimated robot pose
+    std::vector <Eigen::Vector3d> estimate_;// the estimated robot pose
 
 };
